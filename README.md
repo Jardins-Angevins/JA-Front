@@ -5,3 +5,8 @@
 
 </div>
 
+
+```
+npx react-native start
+npm run android
+```

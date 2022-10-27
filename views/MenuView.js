@@ -20,7 +20,7 @@ class MenuView extends Component {
 				</View>
 
 				<View style={{marginTop: '20%', width: '70%'}}>
-					<Button color={'#333'} title={'📷  Photographier'} />
+					<Button color={'#333'} title={'📷  Photographier'} onPress={this.navigate('scan')}/>
 					<Text></Text>
 					<Button color={'#333'} title={'ℹ️  Information'} />
 					<Text></Text>
