@@ -6,6 +6,12 @@ import Decoration from '../components/Decoration.js';
 
 class MenuView extends Component {
 
+	navigate(place) {
+		return (function() {
+			this.props.navigation.navigate(place)
+		}).bind(this);
+	}
+
 	render() {
 		return (
 			<View style={styles.app}>
@@ -20,7 +26,7 @@ class MenuView extends Component {
 					<Text></Text>
 					<Button color={'#333'} title={'🗺  Cartographie'} />
 					<Text></Text>
-					<Button color={'#333'} title={'📊  Statistiques'} />
+					<Button color={'#333'} title={'📊  Statistiques'} onPress={this.navigate('statistics')}/>
 				</View>
 
 				<Decoration/>
