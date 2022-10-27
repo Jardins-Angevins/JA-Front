@@ -14,11 +14,13 @@ class MenuView extends Component {
 				</View>
 
 				<View style={{marginTop: '20%', width: '70%'}}>
-					<Button color={'#333'} title={'📷  Reconaissance'}>📷 </Button>
+					<Button color={'#333'} title={'📷  Photographier'} />
 					<Text></Text>
-					<Button color={'#333'} title={'ℹ️  Wiki'}></Button>
+					<Button color={'#333'} title={'ℹ️  Information'} />
 					<Text></Text>
-					<Button color={'#333'} title={'🗺  Carte'}></Button>
+					<Button color={'#333'} title={'🗺  Cartographie'} />
+					<Text></Text>
+					<Button color={'#333'} title={'📊  Statistiques'} />
 				</View>
 
 				<Decoration/>
