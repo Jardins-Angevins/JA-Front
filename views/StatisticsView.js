@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
-import AppLogo from '../components/AppLogo.js';
+import AppTitle from '../components/AppTitle.js';
 import Decoration from '../components/Decoration.js';
 
 class StatisticsView extends Component {
@@ -9,9 +9,9 @@ class StatisticsView extends Component {
 	render() {
 		return (
 			<View style={styles.app}>
+
 				<View style={{width: '60%'}}>
-					<Text style={{color:'#6AA84F', fontWeight:'800', fontSize: 30, margin: 0, padding: 0, textAlign: 'left'}}> Données </Text>
-					<Text style={{color:'#703826', fontWeight:'900', fontSize: 30, margin: 0, padding: 0, textAlign: 'right'}}> Statistiques </Text>
+					<AppTitle first="Données" last="Statistiques" />
 				</View>
 
 				<View style={{marginTop: '20%', width: '80%'}}>

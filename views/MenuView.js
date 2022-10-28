@@ -24,7 +24,7 @@ class MenuView extends Component {
 					<Text></Text>
 					<Button color={'#333'} title={'ℹ️  Information'} />
 					<Text></Text>
-					<Button color={'#333'} title={'🗺  Cartographie'} />
+					<Button color={'#333'} title={'🗺  Cartographie'} onPress={this.navigate('mapmenu')}/>
 					<Text></Text>
 					<Button color={'#333'} title={'📊  Statistiques'} onPress={this.navigate('statistics')}/>
 				</View>
