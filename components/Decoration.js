@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { StyleSheet, Image, View } from 'react-native';
+import { Image, View } from 'react-native';
 
 class AppLogo extends Component {
 
@@ -51,7 +51,7 @@ class AppLogo extends Component {
 					source={require('../assets/plante-decorative/b.png')}
 					/>
 			</View>
-		)
+		);
 	}
 
 }
