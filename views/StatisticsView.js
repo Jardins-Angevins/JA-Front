@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 
 import AppTitle from '../components/AppTitle.js';
 import Decoration from '../components/Decoration.js';
+import StatBox from '../components/StatBox.js';
 
 class StatisticsView extends Component {
 
@@ -15,60 +16,30 @@ class StatisticsView extends Component {
 				</View>
 
 				<View style={{marginTop: '20%', width: '80%'}}>
-					<View style={styles.statBox}>
-						<Image
-							source={require('../assets/stats-icon/A.png')}
-							style={styles.statLogo}
-							/>
-						<View style={styles.statText}>
-							<Text style={styles.statData}> 6521 </Text>
-							<Text style={styles.statDesc}> Nombre d'essences différentes </Text>
-						</View>
-					</View>
+					<StatBox
+						value={6521}
+						desc=" Nombre d'essences différentes"
+						icon_src={require("../assets/stats-icon/A.png")} />
+					
+					<StatBox
+						value={6521}
+						desc="Nombre de specimens recencés"
+						icon_src={require("../assets/stats-icon/B.png")} />
+					
+					<StatBox
+						value={6521}
+						desc="Nombre de téléchargement"
+						icon_src={require("../assets/stats-icon/C.png")} />
 
-					<View style={styles.statBox}>
-						<Image
-							source={require('../assets/stats-icon/B.png')}
-							style={styles.statLogo}
-							/>
-						<View style={styles.statText}>
-							<Text style={styles.statData}> 6521 </Text>
-							<Text style={styles.statDesc}> Nombre de specimens recencés </Text>
-						</View>
-					</View>
+					<StatBox
+						value={6521}
+						desc="Nombre de contributions"
+						icon_src={require("../assets/stats-icon/D.png")} />
 
-					<View style={styles.statBox}>
-						<Image
-							source={require('../assets/stats-icon/C.png')}
-							style={styles.statLogo}
-							/>
-						<View style={styles.statText}>
-							<Text style={styles.statData}> 6521 </Text>
-							<Text style={styles.statDesc}> Nombre de téléchargement </Text>
-						</View>
-					</View>
-
-					<View style={styles.statBox}>
-						<Image
-							source={require('../assets/stats-icon/D.png')}
-							style={styles.statLogo}
-							/>
-						<View style={styles.statText}>
-							<Text style={styles.statData}> 6521 </Text>
-							<Text style={styles.statDesc}> Nombre de contributions </Text>
-						</View>
-					</View>
-
-					<View style={styles.statBox}>
-						<Image
-							source={require('../assets/stats-icon/E.png')}
-							style={styles.statLogo}
-							/>
-						<View style={styles.statText}>
-							<Text style={styles.statData}> 6521 </Text>
-							<Text style={styles.statDesc}> Nombre de photos stockées </Text>
-						</View>
-					</View>
+					<StatBox
+						value={6521}
+						desc="Nombre de photos stockées"
+						icon_src={require("../assets/stats-icon/E.png")} />
 				</View>
 
 				<Decoration/>
@@ -85,31 +56,6 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 
-
-	statBox: {
-		display:'flex',
-		flexDirection:'row'
-	},
-	statLogo: {
-		width:40,
-		height:40,
-		margin:10
-	},
-	statText: {
-		display:'flex',
-		flexDirection:'column'
-	},
-	statData: {
-		color: 'black',
-		fontWeight: 'bold',
-		fontSize: 22
-	},
-	statDesc: {
-		color: 'black',
-		fontWeight: '300',
-		fontSize: 14,
-		fontStyle: 'italic'
-	}
 });
 
 export default StatisticsView;
