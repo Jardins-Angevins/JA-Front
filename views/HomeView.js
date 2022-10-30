@@ -42,7 +42,7 @@ class HomeView extends Component {
 
 	render() {
 		return (
-			<View style={appStyles.app}>
+			<View style={{...appStyles.app,paddingTop:80}}>
 				<Animated.View style={{ opacity: this.state.fadeAnim, width: '60%' }}>
 					<AppLogo />
 				</Animated.View>
