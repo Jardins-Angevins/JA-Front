@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { Camera, useCameraDevices } from "react-native-vision-camera";
 
 export function CameraComponent(props) {

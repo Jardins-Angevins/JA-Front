@@ -20,7 +20,7 @@ class MapMenuView extends Component {
 				</View>
 
 				<View style={{marginTop: '20%', width: '70%'}}>
-					<Button color={'#333'} title={'📅  Vue général'}/>
+					<Button color={'#333'} title={'📅  Vue général'} onPress={this.navigate('mapgeneral')}/>
 					<Text style={styles.menuDesc}>Vue d’ensemble de tous les specimens recencés</Text>
 					<Button color={'#333'} title={'🪴  Habitat specimen'} />
 					<Text style={styles.menuDesc}>Vue de l’habitat actuel d’un specimen en particulier</Text>
