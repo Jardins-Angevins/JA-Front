@@ -7,6 +7,8 @@ import appStyles from '../assets/appStyles.js';
 import Decoration from '../components/Decoration.js';
 import CameraComponent from '../components/Camera.js';
 
+import CameraService from '../services/CameraService.js';
+
 
 class ScanView extends Component {
 
@@ -19,33 +21,23 @@ class ScanView extends Component {
 
 		this.metadataCam = {};
 	}
-	handleCameraPermission(status) {
-		switch (status) {
-			case 'authorized':
-				// Super ! ^^
-				break;
-
-			case 'denied':
-				Alert.alert(
-					"Permission(s) manquante(s)",
-					"L'application requiert l'accès à votre camera",
-					[{ text: 'Ok' }]
-				);
-				break;
-
-			case 'not-determined':
-				Camera.requestCameraPermission().then(this.handleCameraPermission.bind(this));
-				break;
-
-		}
-	}
 
 	componentDidMount() {
-		Camera.getCameraPermissionStatus()
-			.then(this.handleCameraPermission.bind(this))
+		// Handle permissions
+		CameraService
+			.handlePermissions()
+			.then( granted => { 
+				if( ! granted ) 
+					Alert.alert(
+						'Permission(s) manquante(s)',
+						"L'application requiert l'accès à votre camera",
+						[{ text: 'Ok' }]
+					);
+			});
 	}
 
 	takePicture() {
+		// TO DO : put in CameraService
 		this.metadataCam
 			.camRef
 			.current
