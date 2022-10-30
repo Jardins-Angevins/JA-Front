@@ -1,9 +1,12 @@
-import { Component, useRef } from 'react';
-import { StyleSheet, Text, View, Image, Alert, Button, TouchableOpacity } from 'react-native';
-import { Camera, useCameraDevices } from 'react-native-vision-camera';
-import { CameraComponent } from '../components/Camera.js';
+import { Component } from 'react';
+import { Text, View, Alert, Button, TouchableOpacity } from 'react-native';
+import { Camera } from 'react-native-vision-camera';
+
+import appStyles from '../assets/appStyles.js';
 
 import Decoration from '../components/Decoration.js';
+import CameraComponent from '../components/Camera.js';
+
 
 class ScanView extends Component {
 
@@ -68,7 +71,7 @@ class ScanView extends Component {
 	render() {
 
 		return (
-			<View style={styles.app}>
+			<View style={appStyles.app}>
 				<CameraComponent
 					meta={this.metadataCam} />
 				<Decoration />
@@ -118,40 +121,5 @@ class ScanView extends Component {
 		);
 	}
 }
-
-const styles = StyleSheet.create({
-	app: {
-		backgroundColor: '#DAFFE0',
-		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-
-
-	statBox: {
-		display: 'flex',
-		flexDirection: 'row'
-	},
-	statLogo: {
-		width: 40,
-		height: 40,
-		margin: 10
-	},
-	statText: {
-		display: 'flex',
-		flexDirection: 'column'
-	},
-	statData: {
-		color: 'black',
-		fontWeight: 'bold',
-		fontSize: 22
-	},
-	statDesc: {
-		color: 'black',
-		fontWeight: '300',
-		fontSize: 14,
-		fontStyle: 'italic'
-	}
-});
 
 export default ScanView;

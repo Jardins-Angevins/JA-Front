@@ -1,5 +1,7 @@
 import { Component } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { View } from 'react-native';
+
+import appStyles from '../assets/appStyles.js';
 
 import AppTitle from '../components/AppTitle.js';
 import Decoration from '../components/Decoration.js';
@@ -9,7 +11,7 @@ class StatisticsView extends Component {
 
 	render() {
 		return (
-			<View style={styles.app}>
+			<View style={appStyles.app}>
 
 				<View style={{width: '60%'}}>
 					<AppTitle first="Données" last="Statistiques" />
@@ -47,15 +49,5 @@ class StatisticsView extends Component {
 		);
 	}
 }
-
-const styles = StyleSheet.create({
-	app: {
-		backgroundColor: '#DAFFE0',
-		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-
-});
 
 export default StatisticsView;

@@ -1,6 +1,7 @@
 import { Component } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import appStyles from '../assets/appStyles.js';
 
 import AppTitle from '../components/AppTitle.js';
 import Decoration from '../components/Decoration.js';
@@ -33,7 +34,7 @@ class MapGeneralView extends Component {
 
 	render() {
 		return (
-			<View style={styles.app}>
+			<View style={appStyles.app}>
 				<View style={{ width: '60%' }}>
 					<AppTitle first="Vue" last="Général" />
 				</View>
@@ -56,19 +57,5 @@ class MapGeneralView extends Component {
 		);
 	}
 }
-
-const styles = StyleSheet.create({
-	app: {
-		backgroundColor: '#DAFFE0',
-		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-	menuDesc: {
-		color: '#333',
-		fontStyle: 'italic',
-		marginBottom: 20
-	}
-});
 
 export default MapGeneralView;

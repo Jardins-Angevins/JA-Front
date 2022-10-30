@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Camera, useCameraDevices } from "react-native-vision-camera";
 
-export function CameraComponent(props) {
+export default function CameraComponent(props) {
 
 	// Grab the device who run the stream
 	const devices = useCameraDevices();

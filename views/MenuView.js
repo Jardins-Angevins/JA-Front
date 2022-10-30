@@ -1,8 +1,11 @@
 import { Component } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { Text, View, Button } from 'react-native';
+
+import appStyles from '../assets/appStyles.js';
 
 import AppLogo from '../components/AppLogo.js';
 import Decoration from '../components/Decoration.js';
+
 
 class MenuView extends Component {
 
@@ -14,7 +17,7 @@ class MenuView extends Component {
 
 	render() {
 		return (
-			<View style={styles.app}>
+			<View style={appStyles.app}>
 				<View style={{width: '60%'}}>
 					<AppLogo/>
 				</View>
@@ -34,17 +37,5 @@ class MenuView extends Component {
 		);
 	}
 }
-
-const styles = StyleSheet.create({
-	app: {
-		backgroundColor: '#DAFFE0',
-		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-	menuButton: {
-		padding: '5pt'
-	}
-});
 
 export default MenuView;

@@ -1,6 +1,7 @@
 import { Component } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import appStyles from '../assets/appStyles.js';
 
 import AppTitle from '../components/AppTitle.js';
 import Decoration from '../components/Decoration.js';
@@ -33,7 +34,7 @@ class MapEvolView extends Component {
 
 	render() {
 		return (
-			<View style={styles.app}>
+			<View style={appStyles.app}>
 				<View style={{ width: '60%' }}>
 					<AppTitle first="Évolution" last="Specimen" />
 				</View>
@@ -47,7 +48,7 @@ class MapEvolView extends Component {
 						onRegionChange={this.onRegionChange}
 					>
 						{this.state.markers}
-						</MapView>
+					</MapView>
 
 				</View>
 
@@ -56,14 +57,5 @@ class MapEvolView extends Component {
 		);
 	}
 }
-
-const styles = StyleSheet.create({
-	app: {
-		backgroundColor: '#DAFFE0',
-		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-});
 
 export default MapEvolView;

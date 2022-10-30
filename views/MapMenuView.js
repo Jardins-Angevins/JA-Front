@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
+import appStyles from '../assets/appStyles.js';
+
 import AppTitle from '../components/AppTitle.js';
 import Decoration from '../components/Decoration.js';
 
@@ -14,7 +16,7 @@ class MapMenuView extends Component {
 
 	render() {
 		return (
-			<View style={styles.app}>
+			<View style={appStyles.app}>
 				<View style={{ width: '60%' }}>
 					<AppTitle first="Cartographie" last="Angevine" />
 				</View>
@@ -49,12 +51,6 @@ class MapMenuView extends Component {
 }
 
 const styles = StyleSheet.create({
-	app: {
-		backgroundColor: '#DAFFE0',
-		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
 	menuDesc: {
 		color: '#333',
 		fontStyle: 'italic',
