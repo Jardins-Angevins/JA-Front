@@ -21,9 +21,13 @@ export default function App() {
 		<NavigationContainer >
 			<Stack.Navigator>
 				<Stack.Screen name="home" component={HomeView} options={{ headerShown: false }} />
+
 				<Stack.Screen name="menu" component={MenuView} options={{ headerShown: false }} />
+
 				<Stack.Screen name="statistics" component={StatisticsView} options={{ headerShown: false }} />
+
 				<Stack.Screen name="scan" component={ScanView} options={{ headerShown: false }} />
+
 				<Stack.Screen name="map-menu" component={MapMenuView} options={{ headerShown: false }} />
 				<Stack.Screen name="map-general" component={MapGeneralView} options={{ headerShown: false }} />
 				<Stack.Screen name="map-specimen" component={MapSpecimenView} options={{ headerShown: false }} />

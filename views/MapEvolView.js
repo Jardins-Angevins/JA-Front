@@ -64,11 +64,6 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
-	menuDesc: {
-		color: '#333',
-		fontStyle: 'italic',
-		marginBottom: 20
-	}
 });
 
 export default MapEvolView;

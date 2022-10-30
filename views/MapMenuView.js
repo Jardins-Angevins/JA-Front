@@ -7,7 +7,7 @@ import Decoration from '../components/Decoration.js';
 class MapMenuView extends Component {
 
 	navigate(place) {
-		return (function() {
+		return (function () {
 			this.props.navigation.navigate(place)
 		}).bind(this);
 	}
@@ -15,20 +15,34 @@ class MapMenuView extends Component {
 	render() {
 		return (
 			<View style={styles.app}>
-				<View style={{width: '60%'}}>
-					<AppTitle first="Cartographie" last="Angevine"/>
+				<View style={{ width: '60%' }}>
+					<AppTitle first="Cartographie" last="Angevine" />
 				</View>
 
-				<View style={{marginTop: '20%', width: '70%'}}>
-					<Button color={'#333'} title={'📅  Vue général'} onPress={this.navigate('map-general')}/>
+				<View style={{ marginTop: '20%', width: '70%' }}>
+					<Button
+						color={'#333'}
+						title={'📅  Vue général'}
+						onPress={this.navigate('map-general')} 
+						/>
 					<Text style={styles.menuDesc}>Vue d’ensemble de tous les specimens recencés</Text>
-					<Button color={'#333'} title={'🪴  Habitat specimen'} onPress={this.navigate('map-specimen')}/>
+
+					<Button 
+						color={'#333'}
+						title={'🪴  Habitat specimen'}
+						onPress={this.navigate('map-specimen')}
+						/>
 					<Text style={styles.menuDesc}>Vue de l’habitat actuel d’un specimen en particulier</Text>
-					<Button color={'#333'} title={'🌹  Évolution specimen'} onPress={this.navigate('map-evol')}/>
+
+					<Button
+						color={'#333'}
+						title={'🌹  Évolution specimen'}
+						onPress={this.navigate('map-evol')}
+						/>
 					<Text style={styles.menuDesc}>Vue de l’évolution de l’habitat d’un certain specimen</Text>
 				</View>
 
-				<Decoration/>
+				<Decoration />
 			</View>
 		);
 	}
