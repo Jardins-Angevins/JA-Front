@@ -5,7 +5,7 @@ import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import AppTitle from '../components/AppTitle.js';
 import Decoration from '../components/Decoration.js';
 
-class MapGeneralView extends Component {
+class MapEvolView extends Component {
 
 	constructor(...args) {
 		super(...args);
@@ -35,7 +35,7 @@ class MapGeneralView extends Component {
 		return (
 			<View style={styles.app}>
 				<View style={{ width: '60%' }}>
-					<AppTitle first="Vue" last="Général" />
+					<AppTitle first="Évolution" last="Specimen" />
 				</View>
 
 				<View style={{ width: 350, height: 350, display: 'flex' }}>
@@ -71,4 +71,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default MapGeneralView;
+export default MapEvolView;

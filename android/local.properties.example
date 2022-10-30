@@ -1,0 +1,3 @@
+sdk.dir = /home/etud/Android/sdk
+
+GMAP_APIKEY=Your google maps api token

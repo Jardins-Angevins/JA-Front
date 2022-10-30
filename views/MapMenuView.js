@@ -20,11 +20,11 @@ class MapMenuView extends Component {
 				</View>
 
 				<View style={{marginTop: '20%', width: '70%'}}>
-					<Button color={'#333'} title={'📅  Vue général'} onPress={this.navigate('mapgeneral')}/>
+					<Button color={'#333'} title={'📅  Vue général'} onPress={this.navigate('map-general')}/>
 					<Text style={styles.menuDesc}>Vue d’ensemble de tous les specimens recencés</Text>
-					<Button color={'#333'} title={'🪴  Habitat specimen'} />
+					<Button color={'#333'} title={'🪴  Habitat specimen'} onPress={this.navigate('map-specimen')}/>
 					<Text style={styles.menuDesc}>Vue de l’habitat actuel d’un specimen en particulier</Text>
-					<Button color={'#333'} title={'🌹  Évolution specimen'} />
+					<Button color={'#333'} title={'🌹  Évolution specimen'} onPress={this.navigate('map-evol')}/>
 					<Text style={styles.menuDesc}>Vue de l’évolution de l’habitat d’un certain specimen</Text>
 				</View>
 

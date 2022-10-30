@@ -10,5 +10,10 @@
         tools:targetApi="28"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" android:exported="false" />
+
+		<meta-data
+			android:name="com.google.android.geo.API_KEY"
+			android:value="REPLACE_ME_WITH_THE_GOOGLEMAPS_API_KEY"/>
+
     </application>
 </manifest>

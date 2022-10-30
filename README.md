@@ -10,3 +10,7 @@
 npx react-native start
 npm run android
 ```
+
+```
+REPLACE_ME_WITH_THE_GOOGLEMAPS_API_KEY
+```
