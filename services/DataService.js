@@ -12,4 +12,12 @@ function getStats() {
 	return fetchBackend('/statistics',{});
 }
 
-export { getStats };
+function getMap( pos ) {
+	return fetchBackend(`/map`,{
+		"lat": pos.latitude,
+		"dlat": pos.latitudeDelta,
+		"long": pos.longitude,
+		"dlong": pos.longitudeDelta
+	});
+}
+export { getStats , getMap };
