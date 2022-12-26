@@ -3,5 +3,14 @@
 		"protocol": "http",
 		"adress": "192.168.1.25",
 		"port": 8088
+	},
+	"map": {
+		"maxRefreshRate": 1000,
+		"initialRegion": {
+			"latitude": 47.47358187812243,
+			"longitude": -0.5918208695948124,
+			"latitudeDelta": 0.015,
+			"longitudeDelta": 0.022
+		}
 	}
 }
