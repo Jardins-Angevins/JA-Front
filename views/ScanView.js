@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import { Text, View, Alert, Button, TouchableOpacity } from 'react-native';
-import { Camera } from 'react-native-vision-camera';
 
 import appStyles from '../assets/appStyles.js';
 
@@ -10,13 +9,15 @@ import CameraComponent from '../components/Camera.js';
 import CameraService from '../services/CameraService.js';
 
 
+// TO DO : https://stackoverflow.com/questions/34625829/change-button-style-on-press-in-react-native#answers
 class ScanView extends Component {
 
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			camRef: null
+			camRef: null,
+			buttonColor: CameraService.getFlashState().current ? '#303030B0' : '#FFF'
 		};
 
 		this.metadataCam = {};
@@ -34,6 +35,8 @@ class ScanView extends Component {
 						[{ text: 'Ok' }]
 					);
 			});
+		CameraService
+			.setDevice( this.state.camRef )
 	}
 
 	takePicture() {
@@ -98,17 +101,38 @@ class ScanView extends Component {
 
 
 
-				<View
+				<TouchableOpacity 
 					style={{
-						width: 40,
-						height: 40,
 						position: 'absolute',
 						top: '1%',
 						right: '1%',
-					}}>
+						
+						borderRadius: 400,
+						backgroundColor: this.state.buttonColor,
+						elevation: 0,
+						width: 40,
+						height: 40,
 
-					<Button title={"💡"} color={'#303030B0'} />
-				</View>
+						display: 'flex',
+						justifyContent: 'center',
+						alignItems: 'center'
+					}}
+					
+				>
+					<Text
+						style={{
+							fontSize: 22,
+							width: 40,
+							height: 40,
+							position: 'absolute',
+							top: '1%',
+							right: '1%',
+							textAlign: 'center',
+							textAlignVertical: 'center'
+						}} 
+						onPress={()=>{console.log(this.state.buttonColor);CameraService.toggleFlash}}
+					>💡</Text>
+					</TouchableOpacity>
 			</View>
 		);
 	}
