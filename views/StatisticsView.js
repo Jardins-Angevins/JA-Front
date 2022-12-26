@@ -7,8 +7,22 @@ import AppTitle from '../components/AppTitle.js';
 import Decoration from '../components/Decoration.js';
 import StatBox from '../components/StatBox.js';
 
+import { getStats } from '../services/DataService.js';
+
+
 class StatisticsView extends Component {
 
+	state = {
+		pictureCount: '...',
+		contributionCount: '...',
+		downloadCount: '...',
+		speciesCount: '...',
+		plantsCount: '...'
+	};
+
+	componentDidMount() {
+		getStats().then( data => this.setState(data) )
+	}
 	render() {
 		return (
 			<View style={appStyles.app}>
@@ -19,27 +33,27 @@ class StatisticsView extends Component {
 
 				<View style={{marginTop: '20%', width: '80%'}}>
 					<StatBox
-						value={6521}
-						desc=" Nombre d'essences différentes"
+						value={this.state.speciesCount}
+						desc="Nombre d'essences différentes"
 						icon_src={require("../assets/stats-icon/A.png")} />
 					
 					<StatBox
-						value={6521}
+						value={this.state.plantsCount}
 						desc="Nombre de specimens recencés"
 						icon_src={require("../assets/stats-icon/B.png")} />
 					
 					<StatBox
-						value={6521}
+						value={this.state.downloadCount}
 						desc="Nombre de téléchargement"
 						icon_src={require("../assets/stats-icon/C.png")} />
 
 					<StatBox
-						value={6521}
+						value={this.state.contributionCount}
 						desc="Nombre de contributions"
 						icon_src={require("../assets/stats-icon/D.png")} />
 
 					<StatBox
-						value={6521}
+						value={this.state.pictureCount}
 						desc="Nombre de photos stockées"
 						icon_src={require("../assets/stats-icon/E.png")} />
 				</View>
