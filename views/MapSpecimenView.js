@@ -1,11 +1,16 @@
 import { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import { StyleSheet, View, Image } from 'react-native';
+import MapView, { Marker,PROVIDER_GOOGLE } from 'react-native-maps';
 
 import appStyles from '../assets/appStyles.js';
 
 import AppTitle from '../components/AppTitle.js';
 import Decoration from '../components/Decoration.js';
+
+import { getMap } from '../services/DataService.js';
+import rateLimited from '../services/LimitRateService.js';
+
+import config from '../config.json'; // assert { type : 'application/json'};
 
 class MapSpecimenView extends Component {
 
@@ -13,25 +18,32 @@ class MapSpecimenView extends Component {
 		super(...args);
 
 		this.state = {
-
-			region: {
-				latitude: 47.47358187812243,
-				longitude: -0.5918208695948124,
-				latitudeDelta: 0.015,
-				longitudeDelta: 0.022
-			},
+			region: config.map.initialRegion,
 			markers: [],
 		}
 	}
+
 	navigate(place) {
 		return (function () {
 			this.props.navigation.navigate(place)
 		}).bind(this);
 	}
 
-	onRegionChange = (region) => {
-		console.log(this.state.markers)
-	}
+	onRegionChange = rateLimited((region) => {
+		getMap(region)
+			.then( answer => answer.inputs.map( (position,i) => (
+				<Marker 
+					key={i}
+					coordinate={position}
+					>
+					<Image
+						source={require('../assets/map-dots/a.png')}
+						style={styles.markers}
+						/>
+				</Marker> ) ) 
+			)
+			.then( newMarkers => this.setState({markers:newMarkers}))
+	}, config.map.maxRefreshRate );
 
 	render() {
 		return (
@@ -58,5 +70,17 @@ class MapSpecimenView extends Component {
 		);
 	}
 }
+
+const styles = StyleSheet.create({
+	markers: {
+		width:6,
+		height:6,
+	},
+	map: { 
+		width: 350,
+		height: 350,
+		display: 'flex',
+	},
+});
 
 export default MapSpecimenView;
