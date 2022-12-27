@@ -6,6 +6,7 @@ import appStyles from '../assets/appStyles.js';
 
 import AppTitle from '../components/AppTitle.js';
 import Decoration from '../components/Decoration.js';
+import PlantMarker from '../components/PlantMarker.js';
 
 import { getMap } from '../services/DataService.js';
 import rateLimited from '../services/LimitRateService.js';
@@ -29,30 +30,34 @@ class MapSpecimenView extends Component {
 		}).bind(this);
 	}
 
+	advancedNavivate(place) {
+		return (function (param) {
+			this.props.navigation.navigate(place,param)
+		}).bind(this);
+	}
+
 	onRegionChange = rateLimited((region) => {
 		getMap(region)
 			.then( answer => answer.inputs.map( (position,i) => (
-				<Marker 
+				<PlantMarker
 					key={i}
 					coordinate={position}
-					>
-					<Image
-						source={require('../assets/map-dots/a.png')}
-						style={styles.markers}
-						/>
-				</Marker> ) ) 
+					plantId={position.iaGuessedSpeciesId}
+					traveller={this.advancedNavivate('wiki-plant')}
+					/>
+				) ) 
 			)
 			.then( newMarkers => this.setState({markers:newMarkers}))
 	}, config.map.maxRefreshRate );
 
-	render() {
+	render() {;
 		return (
 			<View style={appStyles.app}>
 				<View style={appStyles.fullWidth}>
 					<AppTitle first="Habitat" last="Specimen" />
 				</View>
 
-				<View style={{ width: 350, height: 350, display: 'flex' }}>
+				<View style={styles.map}>
 					<MapView
 						provider={PROVIDER_GOOGLE}
 						style={StyleSheet.absoluteFillObject}

@@ -70,10 +70,6 @@ class MapEvolView extends Component {
 }
 
 const styles = StyleSheet.create({
-	markers: {
-		width:6,
-		height:6,
-	},
 	map: { 
 		width: 350,
 		height: 350,

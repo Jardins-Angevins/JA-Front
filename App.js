@@ -13,6 +13,8 @@ import MapMenuView from './views/MapMenuView.js';
 import MapGeneralView from './views/MapGeneralView.js';
 import MapSpecimenView from './views/MapSpecimenView.js';
 import MapEvolView from './views/MapEvolView.js';
+import WikiListView from './views/WikiListView.js';
+import WikiPlantView from './views/WikiPlantView.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +34,10 @@ export default function App() {
 				<Stack.Screen name="map-general" component={MapGeneralView} options={{ headerShown: false }} />
 				<Stack.Screen name="map-specimen" component={MapSpecimenView} options={{ headerShown: false }} />
 				<Stack.Screen name="map-evol" component={MapEvolView} options={{ headerShown: false }} />
+
+
+				<Stack.Screen name="wiki-list" component={WikiListView} options={{ headerShown: false }} />
+				<Stack.Screen name="wiki-plant" component={WikiPlantView} options={{ headerShown: false }} />
 
 			</Stack.Navigator>
 		</NavigationContainer>
