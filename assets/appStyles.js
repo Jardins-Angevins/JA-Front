@@ -6,7 +6,10 @@ const appStyles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
-	}
+	},
+	fullWidth: {
+		width: '100%',
+	},
 });
 
 export default appStyles;

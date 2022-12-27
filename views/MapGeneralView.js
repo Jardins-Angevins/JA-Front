@@ -47,7 +47,7 @@ class MapGeneralView extends Component {
 	render() {
 		return (
 			<View style={appStyles.app}>
-				<View style={{ width: '50%' }}>
+				<View style={appStyles.fullWidth}>
 					<AppTitle first="Vue" last="Général" />
 				</View>
 

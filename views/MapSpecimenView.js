@@ -48,7 +48,7 @@ class MapSpecimenView extends Component {
 	render() {
 		return (
 			<View style={appStyles.app}>
-				<View style={{ width: '60%' }}>
+				<View style={appStyles.fullWidth}>
 					<AppTitle first="Habitat" last="Specimen" />
 				</View>
 
