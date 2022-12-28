@@ -15,40 +15,55 @@ class WikiListView extends Component {
 	state = {
 		buffer: [],
 		nextPage: 1,
+		status: '☑️',
 	};
 
 	componentDidMount() {
+		this.setState({ status: '📥' })
 		getPlantList(0)
-			.then( data => this.setState({buffer:data.species}) )
+			.then(data => this.setState({ buffer: data.species }))
+			.then(() => this.setState({ status: '☑️' }))
 	}
 
 	endReached() {
-		getPlantList( this.state.nextPage )
-			.then( data => {
-				for(let info of data.species) {
-					this.state.buffer.push(data)
+		this.setState({ status: '📥' })
+		getPlantList(this.state.nextPage)
+			.then(data => {
+				for (let info of data.species) {
+					this.state.buffer.push(info)
 				}
 			})
-		this.setState({nextPage:this.state.nextPage+1})
+			.then(() => this.setState({ status: '☑️' }))
+			.catch(() => this.setState({ status: '✅' }))
+		this.setState({ nextPage: this.state.nextPage + 1 })
 	}
 
 	advancedNavivate(place) {
 		return (function (param) {
-			this.props.navigation.navigate(place,param)
+			this.props.navigation.navigate(place, param)
 		}).bind(this);
 	}
 
-	renderItem({index}) {
-		return <PlantBox nominalNumber={this.state.buffer[index].nominalNumber} navigator={this.advancedNavivate('wiki-plant')}/>;
+	renderItem({ index }) {
+		return <PlantBox nominalNumber={this.state.buffer[index].nominalNumber} navigator={this.advancedNavivate('wiki-plant')} />;
 	}
 
 	render() {
 		return (
 			<View style={appStyles.app}>
 
-				<Decoration/>
+				<Decoration />
 
-				<View style={{marginTop:50}}><Text> </Text></View>
+				<Text
+					style={{
+						position: 'absolute',
+						top: '1%',
+						right: '1%',
+					}}>
+					{this.state.status}
+				</Text>
+
+				<View style={{ marginTop: 50 }}><Text> </Text></View>
 
 				<View style={appStyles.fullWidth} >
 					<AppTitle first="Liste des" last="Espèces" />
@@ -59,7 +74,7 @@ class WikiListView extends Component {
 					renderItem={this.renderItem.bind(this)}
 					onEndReached={this.endReached.bind(this)}
 					style={appStyles.fullWidth}
-					/>
+				/>
 			</View>
 		);
 	}
