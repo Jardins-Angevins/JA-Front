@@ -22,8 +22,8 @@ class WikiPlantView extends Component {
 		}
 
 		getPlant( id )
+		    .then( data => { data.refImage = {uri:`data:image/png;base64,${data.refImage}`} ; return data } )
 			.then( data => this.setState(data) )
-			.then( () => this.state.refImage = {uri:`data:image/png;base64,${this.state.refImage}`} )
 			.catch(this.props.navigation.goBack)
 	}
 	render() {
@@ -123,8 +123,9 @@ const styles = StyleSheet.create({
 		height: 20,
 	},
 	icon: {
-		width: 120,
-		height: 120,
+		width: 180,
+		height: 180,
+		borderRadius: 5,
 	}
 });
 
