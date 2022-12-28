@@ -11,6 +11,7 @@ import { getPlant } from '../services/DataService.js';
 class WikiPlantView extends Component {
 
 	state = {
+		refImage: require('../assets/plant-placeholder.png')
 	};
 
 	componentDidMount() {
@@ -22,6 +23,7 @@ class WikiPlantView extends Component {
 
 		getPlant( id )
 			.then( data => this.setState(data) )
+			.then( () => this.state.refImage = {uri:`data:image/png;base64,${this.state.refImage}`} )
 			.catch(this.props.navigation.goBack)
 	}
 	render() {
@@ -29,7 +31,7 @@ class WikiPlantView extends Component {
 			<View style={{...appStyles.app,height:30}}>
 
 				<View>
-					<Image source={require('../assets/plante-decorative/a.png')} style={styles.icon}/>
+					<Image source={this.state.refImage} style={styles.icon}/>
 				</View>
 
 				<View style={{margin:50}}>
