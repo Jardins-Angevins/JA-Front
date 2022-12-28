@@ -1,4 +1,4 @@
-import config from '../config.json';// assert {type: 'json'};
+import config from '../config.json'; // assert { type : 'application/json'};
 
 class BadResponse extends Error {
 	constructor( code , res ) {
@@ -41,4 +41,28 @@ function getPlantList( page ) {
 	return fetchBackend(`/species/list`,{page});	
 }
 
-export { BadResponse , getStats , getMap , getPlant , getPlantList };
+function postQuery( lat , long , image64 ) {
+	//Params
+	const URLparam = new URLSearchParams({lat,long});
+	const BODYparam = JSON.stringify({image64});
+
+	//URL
+	const URL = `${config.backend.protocol}://${config.backend.adress}:${config.backend.port}/query?${URLparam}`;
+
+	// Query
+	return fetch(URL,{
+		method:'POST',
+		headers:{
+			'Content-Type':'application/json'
+		},
+		body:BODYparam,
+	}).then( async res => {
+		if( res.status == 200 ) {
+			return [200,( await res.json()).prediction]
+		} else {
+			return [res.status,null];
+		}
+	})
+}
+
+export { BadResponse , getStats , getMap , getPlant , getPlantList , postQuery };
