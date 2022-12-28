@@ -25,7 +25,7 @@ class PlantBox extends Component {
 
 	render() {
 		return (
-			<View style={styles.plantBox} onTouchStart={this.onPress.bind(this)}>
+			<View style={styles.plantBox} onTouchEnd={this.onPress.bind(this)}>
 				<Image
 					source={this.state.image}
 					style={styles.plantImg}
