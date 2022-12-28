@@ -22,7 +22,7 @@ function getMap( pos ) {
 }
 
 function getPlant( nominalNumber ) {
-	return fetchBackend('/species',{nominalNumber});
+	return fetchBackend('/species/wiki',{nominalNumber});
 }
 
 export { getStats , getMap , getPlant };
