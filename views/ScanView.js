@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Text, View, Alert, Button, TouchableOpacity } from 'react-native';
+import { View, Alert, Image, TouchableOpacity } from 'react-native';
 
 import appStyles from '../assets/appStyles.js';
 
@@ -7,6 +7,8 @@ import Decoration from '../components/Decoration.js';
 import CameraComponent from '../components/Camera.js';
 
 import CameraService from '../services/CameraService.js';
+import GeolocalisationService from '../services/GeolocalisationService.js';
+import { postQuery } from '../services/DataService.js';
 
 
 // TO DO : https://stackoverflow.com/questions/34625829/change-button-style-on-press-in-react-native#answers
@@ -17,10 +19,18 @@ class ScanView extends Component {
 
 		this.state = {
 			camRef: null,
-			buttonColor: CameraService.getFlashState().current ? '#303030B0' : '#FFF'
+			flashA: require('../assets/interface/flash-light-button.png'),
+			flashB: require('../assets/interface/flash-light-button_.png'),
+			flash: require('../assets/interface/flash-light-button.png'),
 		};
 
 		this.metadataCam = {};
+	}
+
+	advancedNavivate(place) {
+		return (function (param) {
+			this.props.navigation.navigate(place,param)
+		}).bind(this);
 	}
 
 	componentDidMount() {
@@ -35,32 +45,29 @@ class ScanView extends Component {
 						[{ text: 'Ok' }]
 					);
 			});
+		GeolocalisationService
+			.handlePermissions()
+			.then( granted => { 
+				if( ! granted ) 
+					Alert.alert(
+						'Permission(s) manquante(s)',
+						"L'application requiert l'accès à votre position",
+						[{ text: 'Ok' }]
+					);
+			});
 		CameraService
-			.setDevice( this.state.camRef )
+			.setDevice( this.metadataCam )
 	}
 
-	takePicture() {
-		// TO DO : put in CameraService
-		this.metadataCam
-			.camRef
-			.current
-			.takePhoto({ flash: 'off' })
-			.then(plainData => `file://${plainData.path}`)
-			.then(fetch)
-			.then(res => res.blob())
-			.then(blob => new Promise((resolve, reject) => {
-				let reader = new FileReader();
-				reader.readAsDataURL(blob);
-				reader.onloadend = function () {
-					resolve(reader.result)
-				}
-				reader.onerror = function (err) {
-					reject(err);
-				}
-			}))
-			.then(k => fetch('http://192.168.1.16:3000', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ data: k }) }))
-			.then(console.log)
-			.catch(console.error)
+	async takePicture() {
+		const img64 = await CameraService.takePicture();
+		const pos = await GeolocalisationService.get();
+		const [ code , id ] = await postQuery( pos.coords.latitude , pos.coords.longitude , img64 );
+		if(id) {
+			this.advancedNavivate('wiki-plant')({nominalNumber:id});
+		} else {
+			Alert.alert( 'Erreur' , `${code}` , [{ text: '😔' }] );
+		}
 	}
 
 	render() {
@@ -86,17 +93,18 @@ class ScanView extends Component {
 						justifyContent: 'center',
 						alignItems: 'center'
 					}}
+					onPress={this.takePicture.bind(this)}
 				>
-					<Text
+					<Image
+						source={require('../assets/interface/capture-button.png')}
 						style={{
 							fontSize: 22,
 							width: 60,
 							height: 60,
 							textAlign: 'center',
 							textAlignVertical: 'center'
-						}} 
-						onPress={this.takePicture.bind(this)}
-					>📷</Text>
+						}}
+					/>
 				</TouchableOpacity>
 
 
@@ -108,18 +116,23 @@ class ScanView extends Component {
 						right: '1%',
 						
 						borderRadius: 400,
-						backgroundColor: this.state.buttonColor,
 						elevation: 0,
 						width: 40,
 						height: 40,
 
 						display: 'flex',
 						justifyContent: 'center',
-						alignItems: 'center'
+						alignItems: 'center',
 					}}
+
+					onPress={()=>{
+						console.log(this.state.buttonColor)
+						this.setState({flash:CameraService.getFlashState().current ? this.state.flashB : this.state.flashA });
+						CameraService.toggleFlash()}}
 					
 				>
-					<Text
+					<Image
+					source={ this.state.flash }
 						style={{
 							fontSize: 22,
 							width: 40,
@@ -130,8 +143,7 @@ class ScanView extends Component {
 							textAlign: 'center',
 							textAlignVertical: 'center'
 						}} 
-						onPress={()=>{console.log(this.state.buttonColor);CameraService.toggleFlash}}
-					>💡</Text>
+					/>
 					</TouchableOpacity>
 			</View>
 		);
