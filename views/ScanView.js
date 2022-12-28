@@ -126,7 +126,6 @@ class ScanView extends Component {
 					}}
 
 					onPress={()=>{
-						console.log(this.state.buttonColor)
 						this.setState({flash:CameraService.getFlashState().current ? this.state.flashB : this.state.flashA });
 						CameraService.toggleFlash()}}
 					

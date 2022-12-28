@@ -30,7 +30,6 @@ class WikiListView extends Component {
 				}
 			})
 		this.setState({nextPage:this.state.nextPage+1})
-		console.log(this.state.nextPage)
 	}
 
 	advancedNavivate(place) {
