@@ -1,6 +1,6 @@
 import config from '../config.json';// assert {type: 'json'};
 
-function fetchBackend( endpoint , param ) {
+async function fetchBackend( endpoint , param ) {
 	if( ! (param instanceof URLSearchParams) ) param = new URLSearchParams(param);
 
 	const URI = `${config.backend.protocol}://${config.backend.adress}:${config.backend.port}${endpoint}?${param}`
@@ -25,4 +25,8 @@ function getPlant( nominalNumber ) {
 	return fetchBackend('/species/wiki',{nominalNumber});
 }
 
-export { getStats , getMap , getPlant };
+function getPlantList( page ) {
+	return fetchBackend(`/species/list`,{page});	
+}
+
+export { getStats , getMap , getPlant , getPlantList };

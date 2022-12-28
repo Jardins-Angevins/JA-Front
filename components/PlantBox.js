@@ -5,64 +5,67 @@ import { getPlant } from '../services/DataService';
 class PlantBox extends Component {
 
 	state = {
-		cname: 'test',
-		sname: 'testulia',
-		image: require("../assets/stats-icon/A.png")
+		cname: 'Chargement',
+		sname: '...',
+		image: require("../assets/plant-placeholder.png")
+	}
+
+	onPress() {
+		this.props.navigator({nominalNumber:this.props.nominalNumber})
 	}
 
 	componentDidMount() {
 		getPlant( this.props.nominalNumber )
-			.then(console.log)/*
 			.then( data => this.setState({
 				'cname': data.name,
-				'sname': data.scientificName
-			}) )*/
+				'sname': data.scientificName,
+				'image': { uri : `data:image/png;base64,${data.refImage}`},
+			}) )
 	}
+
 	render() {
 		return (
-
-			<View style={styles.statBox}>
+			<View style={styles.plantBox} onTouchStart={this.onPress.bind(this)}>
 				<Image
-					source={require("../assets/stats-icon/A.png")}
-					style={styles.statLogo}
+					source={this.state.image}
+					style={styles.plantImg}
 				/>
-				<View style={styles.statText}>
-					<Text style={styles.statData}> {this.state.cname} </Text>
-					<Text style={styles.statDesc}> {this.state.sname} </Text>
+				<View style={styles.plantText}>
+					<Text style={styles.plantName}> {this.state.cname} </Text>
+					<Text style={styles.plantScientificName}> {this.state.sname} </Text>
 				</View>
 			</View>
 		)
 	}
 
+		
 }
 
 const styles = StyleSheet.create({
-	statBox: {
+	plantBox: {
 		display: 'flex',
 		flexDirection: 'row'
 	},
-	statLogo: {
+	plantImg: {
 		width: 40,
 		height: 40,
 		margin: 10
 	},
-	statText: {
+	plantText: {
 		display: 'flex',
 		flexDirection: 'column'
 	},
-	statData: {
+	plantName: {
 		color: 'black',
 		fontWeight: 'bold',
 		fontSize: 22
 	},
-	statDesc: {
+	plantScientificName: {
 		color: 'black',
 		fontWeight: '300',
 		fontSize: 14,
 		fontStyle: 'italic'
 	},
-
-
 });
 
 export default PlantBox;

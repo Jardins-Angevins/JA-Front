@@ -7,36 +7,40 @@ import AppTitle from '../components/AppTitle.js';
 import Decoration from '../components/Decoration.js';
 import PlantBox from '../components/PlantBox.js';
 
-import { getStats } from '../services/DataService.js';
+import { getPlantList } from '../services/DataService.js';
 
 
 class WikiListView extends Component {
 
 	state = {
-		buffer: [... new Array(100)].map((_,i)=>null)
+		buffer: [],
+		nextPage: 1,
 	};
 
 	componentDidMount() {
-		getStats().then( data => this.setState(data) )
-	}
-
-	renderItem({index}) {
-		return <PlantBox nominalNumber={index} />;
-		if( this.state.buffer[index] == null ) {
-			return (
-				<Text style={{color:'black'}}>Empty</Text>
-			  );
-		} else {
-			return (
-				<Text>Hi</Text>
-			  );
-		}
+		getPlantList(0)
+			.then( data => this.setState({buffer:data.species}) )
 	}
 
 	endReached() {
-		for(let i=0; i<10 ; i++) {
-			this.state.buffer.push(null)
-		}
+		getPlantList( this.state.nextPage )
+			.then( data => {
+				for(let info of data.species) {
+					this.state.buffer.push(data)
+				}
+			})
+		this.setState({nextPage:this.state.nextPage+1})
+		console.log(this.state.nextPage)
+	}
+
+	advancedNavivate(place) {
+		return (function (param) {
+			this.props.navigation.navigate(place,param)
+		}).bind(this);
+	}
+
+	renderItem({index}) {
+		return <PlantBox nominalNumber={this.state.buffer[index].nominalNumber} navigator={this.advancedNavivate('wiki-plant')}/>;
 	}
 
 	render() {
@@ -55,6 +59,7 @@ class WikiListView extends Component {
 					data={this.state.buffer}
 					renderItem={this.renderItem.bind(this)}
 					onEndReached={this.endReached.bind(this)}
+					style={appStyles.fullWidth}
 					/>
 			</View>
 		);
