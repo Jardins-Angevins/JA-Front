@@ -38,7 +38,12 @@ class MapMenuView extends SuperComponent {
 					<Button
 						color={'#333'}
 						title={'🌹  Évolution specimen'}
-						onPress={this.navigate('map-evol')}
+						onPress={() => 
+							Alert.alert(
+								'🛑',
+								"Selectionnez une espèce via le menu principal",
+								[{ text: '🪴 Ok 🪴' }]
+							)}
 						/>
 					<Text style={styles.menuDesc}>Vue de l’évolution de l’habitat d’un certain specimen</Text>
 				</View>
