@@ -24,13 +24,20 @@ function getStats() {
 	return fetchBackend('/statistics',{});
 }
 
-function getMap( pos ) {
-	return fetchBackend(`/map`,{
+function getMap( pos , args ) {
+	let param = {
 		"lat": pos.latitude,
 		"dlat": pos.latitudeDelta,
 		"long": pos.longitude,
 		"dlong": pos.longitudeDelta
-	});
+	};
+	if( args.nominalNumber ) {
+		param.species = args.nominalNumber;
+	}
+	if( args.year ) {
+		param.year = args.year;
+	}
+	return fetchBackend(`/map`,param);
 }
 
 function getPlant( nominalNumber ) {
