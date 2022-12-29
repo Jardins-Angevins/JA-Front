@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 
 import appStyles from '../assets/appStyles.js';
 
@@ -32,7 +32,12 @@ class MapMenuView extends Component {
 					<Button 
 						color={'#333'}
 						title={'🪴  Habitat specimen'}
-						onPress={this.navigate('map-specimen')}
+						onPress={() => 
+							Alert.alert(
+								'🛑',
+								"Selectionnez une espèce via le menu principal",
+								[{ text: '🪴 Ok 🪴' }]
+							)}
 						/>
 					<Text style={styles.menuDesc}>Vue de l’habitat actuel d’un specimen en particulier</Text>
 

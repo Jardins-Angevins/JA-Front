@@ -30,6 +30,13 @@ class MapSpecimenView extends Component {
 		}).bind(this);
 	}
 
+	componentDidMount() {
+		this.state.nominalNumber = this.props.route.params.nominalNumber;
+		if( this.state.nominalNumber == null ) {
+			this.props.navigation.goBack();
+		}
+	}
+
 	advancedNavivate(place) {
 		return (function (param) {
 			this.props.navigation.navigate(place,param)
@@ -37,7 +44,7 @@ class MapSpecimenView extends Component {
 	}
 
 	onRegionChange = rateLimited((region) => {
-		getMap(region)
+		getMap(region,{nominalNumber:this.state.nominalNumber})
 			.then( answer => answer.inputs.map( (position,i) => (
 				<PlantMarker
 					key={i}
