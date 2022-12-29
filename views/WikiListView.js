@@ -1,4 +1,3 @@
-import { Component } from 'react';
 import { FlatList, Text, View } from 'react-native';
 
 import appStyles from '../assets/appStyles.js';
@@ -6,11 +5,12 @@ import appStyles from '../assets/appStyles.js';
 import AppTitle from '../components/AppTitle.js';
 import Decoration from '../components/Decoration.js';
 import PlantBox from '../components/PlantBox.js';
+import SuperComponent from '../components/SuperComponent.js';
 
 import { getPlantList } from '../services/DataService.js';
 
 
-class WikiListView extends Component {
+class WikiListView extends SuperComponent {
 
 	state = {
 		buffer: [],
@@ -36,12 +36,6 @@ class WikiListView extends Component {
 			.then(() => this.setState({ status: '☑️' }))
 			.catch(() => this.setState({ status: '✅' }))
 		this.setState({ nextPage: this.state.nextPage + 1 })
-	}
-
-	advancedNavivate(place) {
-		return (function (param) {
-			this.props.navigation.navigate(place, param)
-		}).bind(this);
 	}
 
 	renderItem({ index }) {

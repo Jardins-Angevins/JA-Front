@@ -1,18 +1,17 @@
-import { Component } from 'react';
 import { View, Alert, Image, TouchableOpacity } from 'react-native';
 
 import appStyles from '../assets/appStyles.js';
 
 import Decoration from '../components/Decoration.js';
 import CameraComponent from '../components/Camera.js';
+import SuperComponent from '../components/SuperComponent.js';
 
 import CameraService from '../services/CameraService.js';
 import GeolocalisationService from '../services/GeolocalisationService.js';
 import { postQuery } from '../services/DataService.js';
 
 
-// TO DO : https://stackoverflow.com/questions/34625829/change-button-style-on-press-in-react-native#answers
-class ScanView extends Component {
+class ScanView extends SuperComponent {
 
 	constructor(props) {
 		super(props);
@@ -25,12 +24,6 @@ class ScanView extends Component {
 		};
 
 		this.metadataCam = {};
-	}
-
-	advancedNavivate(place) {
-		return (function (param) {
-			this.props.navigation.navigate(place,param)
-		}).bind(this);
 	}
 
 	componentDidMount() {

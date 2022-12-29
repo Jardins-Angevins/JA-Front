@@ -1,17 +1,17 @@
-import { Component } from 'react';
 import { StyleSheet, View, Image } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import appStyles from '../assets/appStyles.js';
 
 import AppTitle from '../components/AppTitle.js';
 import Decoration from '../components/Decoration.js';
+import SuperComponent from '../components/SuperComponent.js';
 
 import { getMap } from '../services/DataService.js';
 import rateLimited from '../services/LimitRateService.js';
 
 import config from '../config.json'; // assert { type : 'application/json'};
 
-class MapGeneralView extends Component {
+class MapGeneralView extends SuperComponent {
 
 	constructor(...args) {
 		super(...args);
@@ -20,12 +20,6 @@ class MapGeneralView extends Component {
 			region: config.map.initialRegion,
 			markers: [],
 		}
-	}
-	
-	navigate(place) {
-		return (function () {
-			this.props.navigation.navigate(place)
-		}).bind(this);
 	}
 
 	onRegionChange = rateLimited((region) => {

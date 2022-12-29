@@ -1,19 +1,13 @@
-import { Component } from 'react';
 import { Text, View, Button } from 'react-native';
 
 import appStyles from '../assets/appStyles.js';
 
 import AppLogo from '../components/AppLogo.js';
 import Decoration from '../components/Decoration.js';
+import SuperComponent from '../components/SuperComponent.js';
 
 
-class MenuView extends Component {
-
-	navigate(place) {
-		return (function() {
-			this.props.navigation.navigate(place)
-		}).bind(this);
-	}
+class MenuView extends SuperComponent {
 
 	render() {
 		return (

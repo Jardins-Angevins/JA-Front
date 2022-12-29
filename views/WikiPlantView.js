@@ -1,31 +1,19 @@
-import { Component } from 'react';
 import { Button, Dimensions, Image, StyleSheet, Text, View } from 'react-native';
 
 import appStyles from '../assets/appStyles.js';
 
 import Decoration from '../components/Decoration.js';
+import SuperComponent from '../components/SuperComponent.js';
 
 import { getPlant } from '../services/DataService.js';
 
 
-class WikiPlantView extends Component {
+class WikiPlantView extends SuperComponent {
 
 	state = {
 		refImage: require('../assets/plant-placeholder.png'),
 		nominalNumber: null,
 	};
-
-	navigate(place) {
-		return (function () {
-			this.props.navigation.navigate(place)
-		}).bind(this);
-	}
-
-	advancedNavivate(place) {
-		return (function (param) {
-			this.props.navigation.navigate(place,param)
-		}).bind(this);
-	}
 	
 	componentDidMount() {
 		this.state.nominalNumber = this.props.route.params.nominalNumber;

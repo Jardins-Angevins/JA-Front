@@ -1,11 +1,11 @@
-import { Component } from 'react';
 import { StyleSheet, View, Animated } from 'react-native';
+
 import appStyles from '../assets/appStyles.js';
 
-
 import AppLogo from '../components/AppLogo.js';
+import SuperComponent from '../components/SuperComponent.js';
 
-class HomeView extends Component {
+class HomeView extends SuperComponent {
 
 	state = {
 		fadeAnim: new Animated.Value(0)
@@ -30,14 +30,12 @@ class HomeView extends Component {
 	componentDidMount() {
 		this.fadeIn();
 		setTimeout((this.fadeOut).bind(this), 3000);
-		setTimeout(() => this.props.navigation.navigate('menu'), 5000);
+		setTimeout( this.navigate('menu'), 5000);
 		setTimeout((this.neverComeBackAgainHere).bind(this), 5555);
 	}
 
 	neverComeBackAgainHere() {
-		this.props.navigation.addListener('focus', (function () {
-			this.props.navigation.navigate('menu')
-		}).bind(this));
+		this.props.navigation.addListener('focus', this.navigate('menu').bind(this) );
 	}
 
 	render() {

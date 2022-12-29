@@ -1,18 +1,12 @@
-import { Component } from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 
 import appStyles from '../assets/appStyles.js';
 
 import AppTitle from '../components/AppTitle.js';
 import Decoration from '../components/Decoration.js';
+import SuperComponent from '../components/SuperComponent.js';
 
-class MapMenuView extends Component {
-
-	navigate(place) {
-		return (function () {
-			this.props.navigation.navigate(place)
-		}).bind(this);
-	}
+class MapMenuView extends SuperComponent {
 
 	render() {
 		return (
