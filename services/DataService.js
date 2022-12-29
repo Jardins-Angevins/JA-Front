@@ -31,10 +31,10 @@ function getMap( pos , args ) {
 		"long": pos.longitude,
 		"dlong": pos.longitudeDelta
 	};
-	if( args.nominalNumber ) {
+	if( args?.nominalNumber ) {
 		param.species = args.nominalNumber;
 	}
-	if( args.year ) {
+	if( args?.year ) {
 		param.year = args.year;
 	}
 	return fetchBackend(`/map`,param);
