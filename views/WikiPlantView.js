@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Dimensions, Image, StyleSheet, Text, View } from 'react-native';
+import { Button, Dimensions, Image, StyleSheet, Text, View } from 'react-native';
 
 import appStyles from '../assets/appStyles.js';
 
@@ -11,24 +11,38 @@ import { getPlant } from '../services/DataService.js';
 class WikiPlantView extends Component {
 
 	state = {
-		refImage: require('../assets/plant-placeholder.png')
+		refImage: require('../assets/plant-placeholder.png'),
+		nominalNumber: null,
 	};
 
-	componentDidMount() {
-		let id = this.props.route.params.nominalNumber;
+	navigate(place) {
+		return (function () {
+			this.props.navigation.navigate(place)
+		}).bind(this);
+	}
 
-		if( id == null ) {
+	advancedNavivate(place) {
+		return (function (param) {
+			this.props.navigation.navigate(place,param)
+		}).bind(this);
+	}
+	
+	componentDidMount() {
+		this.state.nominalNumber = this.props.route.params.nominalNumber;
+
+		if( this.state.nominalNumber == null ) {
 			this.props.navigation.goBack();
 		}
 
-		getPlant( id )
+		getPlant( this.state.nominalNumber )
 		    .then( data => { data.refImage = {uri:`data:image/png;base64,${data.refImage}`} ; return data } )
 			.then( data => this.setState(data) )
 			.catch(this.props.navigation.goBack)
 	}
+
 	render() {
 		return (
-			<View style={{...appStyles.app,height:30}}>
+			<View style={appStyles.app}>
 
 				<View>
 					<Image source={this.state.refImage} style={styles.icon}/>
@@ -39,7 +53,7 @@ class WikiPlantView extends Component {
 					<Text style={styles.scientificName}>{this.state.scientificName}</Text>
 				</View>
 
-				<View>
+				<View style={{marginBottom:50}}>
 					<View style={{flexDirection: "row",justifyContent:'flex-start',alignItems:'center'}}>
 					<Text style={styles.indicatorText}>Eau</Text>
 					{
@@ -96,6 +110,11 @@ class WikiPlantView extends Component {
 					</View>
 				</View>
 			
+				<Button
+					color={'#333'}
+					title={'🗺️ Zone Habitée'}
+					onPress={() => this.advancedNavivate('map-specimen')({nominalNumber:this.state.nominalNumber})}
+				/>
 				<Decoration/>
 			</View>
 		);
