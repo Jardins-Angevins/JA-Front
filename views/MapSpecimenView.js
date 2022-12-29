@@ -1,19 +1,19 @@
-import { Component } from 'react';
-import { StyleSheet, View, Image } from 'react-native';
-import MapView, { Marker,PROVIDER_GOOGLE } from 'react-native-maps';
+import { StyleSheet, View, Image, Text , Button } from 'react-native';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 
 import appStyles from '../assets/appStyles.js';
 
 import AppTitle from '../components/AppTitle.js';
 import Decoration from '../components/Decoration.js';
 import PlantMarker from '../components/PlantMarker.js';
+import SuperComponent from '../components/SuperComponent.js';
 
-import { getMap } from '../services/DataService.js';
+import { getMap, getPlant } from '../services/DataService.js';
 import rateLimited from '../services/LimitRateService.js';
 
 import config from '../config.json'; // assert { type : 'application/json'};
 
-class MapSpecimenView extends Component {
+class MapSpecimenView extends SuperComponent {
 
 	constructor(...args) {
 		super(...args);
@@ -24,24 +24,18 @@ class MapSpecimenView extends Component {
 		}
 	}
 
-	navigate(place) {
-		return (function () {
-			this.props.navigation.navigate(place)
-		}).bind(this);
-	}
 
 	componentDidMount() {
 		this.state.nominalNumber = this.props.route.params.nominalNumber;
 		if( this.state.nominalNumber == null ) {
 			this.props.navigation.goBack();
 		}
+
+		getPlant( this.state.nominalNumber )
+		    .then( data => { data.refImage = {uri:`data:image/png;base64,${data.refImage}`} ; return data } )
+			.then( data => this.setState(data) )
 	}
 
-	advancedNavivate(place) {
-		return (function (param) {
-			this.props.navigation.navigate(place,param)
-		}).bind(this);
-	}
 
 	onRegionChange = rateLimited((region) => {
 		getMap(region,{nominalNumber:this.state.nominalNumber})
@@ -64,6 +58,16 @@ class MapSpecimenView extends Component {
 					<AppTitle first="Habitat" last="Specimen" />
 				</View>
 
+
+				<View style={{flexDirection:'row', margin: 20}} onTouchEnd={()=>this.advancedNavivate('wiki-plant')({nominalNumber:this.state.nominalNumber})}>
+					<Image source={this.state.refImage} style={styles.icon}/>
+
+					<View style={{}}>
+						<Text style={styles.commonName}>{this.state.name}</Text>
+						<Text style={styles.scientificName}>{this.state.scientificName}</Text>
+					</View>
+				</View>
+
 				<View style={styles.map}>
 					<MapView
 						provider={PROVIDER_GOOGLE}
@@ -76,6 +80,13 @@ class MapSpecimenView extends Component {
 						</MapView>
 
 				</View>
+
+				<Button
+					style={{margin:40}}
+					color={'#333'}
+					title={"🌹 Voir l'évolution"}
+					onPress={()=>this.advancedNavivate('map-evol')({nominalNumber:this.state.nominalNumber})} 
+					/>
 
 				<Decoration />
 			</View>
@@ -92,6 +103,24 @@ const styles = StyleSheet.create({
 		width: 350,
 		height: 350,
 		display: 'flex',
+		marginBottom: 20,
+	},
+
+	commonName: {
+		color: 'black',
+		fontWeight: 'bold',
+		fontSize: 28
+	},
+	scientificName: {
+		color: 'black',
+		fontStyle: 'italic',
+		fontSize: 12
+	},
+	icon: {
+		width: 60,
+		height: 60,
+		borderRadius: 5,
+		marginRight: 20,
 	},
 });
 
