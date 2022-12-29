@@ -12,6 +12,6 @@ export default function rateLimit( callback , rate ) {
 	}).bind({
 		callback,
 		rate,
-		timestamp: +(new Date()) 
+		timestamp: 0 
 	})
 }
