@@ -1,4 +1,4 @@
-import { View, Alert, Image, TouchableOpacity, PixelRatio } from 'react-native';
+import { View, Alert, Image, TouchableOpacity, PixelRatio, Text } from 'react-native';
 
 import appStyles from '../assets/appStyles.js';
 
@@ -23,6 +23,7 @@ class ScanView extends SuperComponent {
 			flashB: require('../assets/interface/flash-light-button_.png'),
 			flash: require('../assets/interface/flash-light-button.png'),
 			dpSizeFor256px: 256/PixelRatio.get(),
+			scanState: ' ',
 		};
 
 		this.metadataCam = {};
@@ -55,9 +56,11 @@ class ScanView extends SuperComponent {
 	}
 
 	async takePicture() {
+		this.setState({scanState : '📤'});
 		const img64 = await CameraService.takePicture();
 		const pos = await GeolocalisationService.get();
 		const [ code , id ] = await postQuery( pos.coords.latitude , pos.coords.longitude , img64 );
+		this.setState({scanState : ' '});
 		if(id) {
 			this.advancedNavivate('wiki-plant')({nominalNumber:id});
 		} else {
@@ -107,7 +110,16 @@ class ScanView extends SuperComponent {
 					/>
 				</TouchableOpacity>
 
-
+				<Text
+					style={{
+						position: 'absolute',
+						top: '1%',
+						left: '1%',
+						
+						elevation: 0,
+						width: 60,
+						height: 60,
+					}} > {this.state.scanState} </Text>
 
 				<TouchableOpacity 
 					style={{
