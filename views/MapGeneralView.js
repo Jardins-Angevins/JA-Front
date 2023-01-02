@@ -27,7 +27,6 @@ class MapGeneralView extends SuperComponent {
 
 	onRegionChange = rateLimited((region) => {
 		getMap(region)
-			.then( k => { console.log(k) ; return k })
 			.then( answer => {
 				let Indeces = [... new Set(answer.inputs.map(k=>k.iaGuessedSpeciesId))];
 				let R = answer.inputs.map( (position,i) => (
@@ -71,7 +70,7 @@ class MapGeneralView extends SuperComponent {
 				<View style={{height:200}}>
 					{
 						this.state.legendIds.map( (nominalNumber,i) => (
-						<View style={{flexDirection:'row'}}>
+						<View style={{flexDirection:'row'}} key={i}>
 							<Image style={styles.legend} source={PlantMarker.getNthMarkerImage(i)} />
 							<PlantBox nominalNumber={nominalNumber} /> 
 						</View> ) )
@@ -87,6 +86,7 @@ const styles = StyleSheet.create({
 	legend: {
 		width:20,
 		height:20,
+		marginVertical: 20,
 	},
 	map: { 
 		width: 350,
