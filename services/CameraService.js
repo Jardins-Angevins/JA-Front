@@ -51,7 +51,6 @@ export default class CameraService {
 
 			//Convert it to png and crop it
 			.then( ImageService.transform )
-			.then( k => {console.log(k);return k;} )
 
 	}
 }
