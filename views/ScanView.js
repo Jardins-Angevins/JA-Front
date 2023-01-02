@@ -77,7 +77,7 @@ class ScanView extends SuperComponent {
 						position: 'absolute',
 						top: '0%',
 						elevation: 0,
-					}}><Canvas ref={ImageService.setLocationRendering} style={{width:256,height:256}} width={this.state.dpSizeFor256px} height={this.state.dpSizeFor256px} /></View>
+					}}><Canvas ref={ImageService.setLocationRendering} style={{width:this.state.dpSizeFor256px,height:this.state.dpSizeFor256px}} width={this.state.dpSizeFor256px} height={this.state.dpSizeFor256px} /></View>
 				<TouchableOpacity 
 					style={{
 						position: 'absolute',

@@ -26,7 +26,7 @@ export default class ImageService {
 				let [sx,sy] = (w>h) ? ([d,0]) : ([0,d]);
 				let [sw,sh] = (w>h) ? ([h,h]) : ([w,w]);
 				let [dx,dy] = [0,0];
-				let [dw,dh] = [256,256];
+				let [dw,dh] = [Math.ceil(256/PixelRatio.get()),Math.ceil(256/PixelRatio.get())];
 				// Reshape on canvas
 				ctx.drawImage( img , sx , sy , sw , sh , dx , dy , dw , dh );
 				// Convertion
