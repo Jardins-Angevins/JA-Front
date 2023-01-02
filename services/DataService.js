@@ -11,12 +11,12 @@ async function fetchBackend( endpoint , param ) {
 	if( ! (param instanceof URLSearchParams) ) param = new URLSearchParams(param);
 
 	const URI = `${config.backend.protocol}://${config.backend.adress}:${config.backend.port}${endpoint}?${param}`
-
+	
 	return fetch(URI).then( async res => {
 		if( ~~(res.status/100) == 2 )
 			return res.json();
 		else
-			throw BadResponse( res.status , await res.text() ) 
+			throw new BadResponse( res.status , await res.text() ) 
 	} );
 }
 
@@ -64,8 +64,8 @@ function postQuery( lat , long , image64 ) {
 		},
 		body:BODYparam,
 	}).then( async res => {
-		if( res.status == 200 ) {
-			return [200,( await res.json()).prediction]
+		if( res.status == 201 ) {
+			return [201,( await res.json()).prediction]
 		} else {
 			return [res.status,null];
 		}

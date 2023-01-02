@@ -1,3 +1,4 @@
+import { PixelRatio } from "react-native";
 import Canvas, { Image } from "react-native-canvas";
 
 export default class ImageService {
@@ -7,11 +8,13 @@ export default class ImageService {
 	static transform( originalPath ) {
 		return new Promise( (resolve) => {
 			let cnv = ImageService.renderLocation;
-			let ctx = cnv.getContext('2d');
-			let img = new Image( ImageService.renderLocation );
 
-			cnv.width = 256;
-			cnv.height = 256;
+			cnv.width = Math.ceil(256/PixelRatio.get());
+			cnv.height = Math.ceil(256/PixelRatio.get());
+
+			let ctx = cnv.getContext('2d');
+			
+			let img = new Image( ImageService.renderLocation );
 
 			img.crossOrigin = '*';
 			img.src = 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Hain_Eiche_Herbst_121696.jpg';//`file://${originalPath}`;
@@ -27,7 +30,11 @@ export default class ImageService {
 				// Reshape on canvas
 				ctx.drawImage( img , sx , sy , sw , sh , dx , dy , dw , dh );
 				// Convertion
-				cnv.toDataURL().then( resolve )
+				cnv.toDataURL()
+					.then( img64 => img64.substr(1,img64.length-2)) // Patch for : https://github.com/iddan/react-native-canvas/issues/124
+					.then( img64 => img64.replace(/^data:image\/png;base64,/,'') ) // Remove the leading "data:image/png;base64," metadata
+					.then( resolve )
+					.then( () => ctx.clearRect(0,0,256,256))
 			});
 		});
 	}

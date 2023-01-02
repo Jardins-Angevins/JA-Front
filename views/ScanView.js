@@ -1,4 +1,4 @@
-import { View, Alert, Image, TouchableOpacity } from 'react-native';
+import { View, Alert, Image, TouchableOpacity, PixelRatio } from 'react-native';
 
 import appStyles from '../assets/appStyles.js';
 
@@ -22,6 +22,7 @@ class ScanView extends SuperComponent {
 			flashA: require('../assets/interface/flash-light-button.png'),
 			flashB: require('../assets/interface/flash-light-button_.png'),
 			flash: require('../assets/interface/flash-light-button.png'),
+			dpSizeFor256px: 256/PixelRatio.get(),
 		};
 
 		this.metadataCam = {};
@@ -75,11 +76,8 @@ class ScanView extends SuperComponent {
 					style={{
 						position: 'absolute',
 						top: '0%',
-						
 						elevation: 0,
-						width: 256,
-						height: 256,
-					}}><Canvas ref={ImageService.setLocationRendering} style={{width:256,height:256}} width={256} height={256} /></View>
+					}}><Canvas ref={ImageService.setLocationRendering} style={{width:256,height:256}} width={this.state.dpSizeFor256px} height={this.state.dpSizeFor256px} /></View>
 				<TouchableOpacity 
 					style={{
 						position: 'absolute',
