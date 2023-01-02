@@ -1,7 +1,7 @@
 import { Camera } from 'react-native-vision-camera';
 import React from 'react';
-
 import ImageService from './ImageService.js';
+
 
 export default class CameraService {
 
@@ -50,23 +50,8 @@ export default class CameraService {
 			.then(plainData => plainData.path)
 
 			//Convert it to png and crop it
-			.then( ImageService )
-
-			//Load image
-			.then(fetch)
-			.then(res => res.blob())
-
-			//Parse image to base64
-			.then(blob => new Promise((resolve, reject) => {
-				let reader = new FileReader();
-				reader.readAsDataURL(blob);
-				reader.onloadend = function () {
-					resolve(reader.result)
-				}
-				reader.onerror = function (err) {
-					reject(err);
-				}
-			}))
+			.then( ImageService.transform )
+			.then( k => {console.log(k);return k;} )
 
 	}
 }

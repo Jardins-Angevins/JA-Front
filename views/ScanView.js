@@ -9,7 +9,8 @@ import SuperComponent from '../components/SuperComponent.js';
 import CameraService from '../services/CameraService.js';
 import GeolocalisationService from '../services/GeolocalisationService.js';
 import { postQuery } from '../services/DataService.js';
-
+import ImageService from '../services/ImageService.js';
+import Canvas from 'react-native-canvas';
 
 class ScanView extends SuperComponent {
 
@@ -70,7 +71,15 @@ class ScanView extends SuperComponent {
 				<CameraComponent
 					meta={this.metadataCam} />
 				<Decoration />
-
+				<View
+					style={{
+						position: 'absolute',
+						top: '0%',
+						
+						elevation: 0,
+						width: 256,
+						height: 256,
+					}}><Canvas ref={ImageService.setLocationRendering} style={{width:256,height:256}} width={256} height={256} /></View>
 				<TouchableOpacity 
 					style={{
 						position: 'absolute',
