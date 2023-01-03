@@ -9,8 +9,6 @@ import SuperComponent from '../components/SuperComponent.js';
 import CameraService from '../services/CameraService.js';
 import GeolocalisationService from '../services/GeolocalisationService.js';
 import { postQuery } from '../services/DataService.js';
-import ImageService from '../services/ImageService.js';
-import Canvas from 'react-native-canvas';
 
 class ScanView extends SuperComponent {
 
@@ -21,8 +19,7 @@ class ScanView extends SuperComponent {
 			camRef: null,
 			flashA: require('../assets/interface/flash-light-button.png'),
 			flashB: require('../assets/interface/flash-light-button_.png'),
-			flash: require('../assets/interface/flash-light-button.png'),
-			dpSizeFor256px: 256/PixelRatio.get(),
+			flash: require('../assets/interface/flash-light-button_.png'),
 			scanState: ' ',
 		};
 
@@ -75,12 +72,6 @@ class ScanView extends SuperComponent {
 				<CameraComponent
 					meta={this.metadataCam} />
 				<Decoration />
-				<View
-					style={{
-						position: 'absolute',
-						top: '0%',
-						elevation: 0,
-					}}><Canvas ref={ImageService.setLocationRendering} style={{width:this.state.dpSizeFor256px,height:this.state.dpSizeFor256px}} width={this.state.dpSizeFor256px} height={this.state.dpSizeFor256px} /></View>
 				<TouchableOpacity 
 					style={{
 						position: 'absolute',
