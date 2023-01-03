@@ -5,7 +5,7 @@ export default class ImageService {
 	static async transform( originalPath ) {
 		let img = await ImageService._reshape( originalPath );
 		let b64 = await ImageService._format( img );
-		return b64;
+		return b64.replace(/^data:image\/png;base64,/,'')
 	}
 
 	static async _reshape( sourcePath ) {
