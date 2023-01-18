@@ -1,6 +1,6 @@
 {
 	"backend": {
-		"protocol": "http",
+		"protocol": "https",
 		"adress": "jardins-angevins.leria-etud.univ-angers.fr",
 		"port": 443
 	},
