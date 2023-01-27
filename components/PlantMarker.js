@@ -25,11 +25,8 @@ class PlantMarker extends Component {
 			<Marker
 				coordinate={this.props.coordinate} 
 				onPress={this.onPress.bind(this)}
+				image={pointerImage}
 				>
-				<Image
-					source={pointerImage}
-					style={{width:8, height:8}}
-				/>
 			</Marker>
 		);
 	}
