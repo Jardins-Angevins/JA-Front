@@ -17,7 +17,8 @@ export default class CameraService {
 				return true;
 
 			case 'denied':
-				return false;
+				await Camera.requestCameraPermission();
+				return CameraService.handlePermissions();
 
 			case 'not-determined':
 				await Camera.requestCameraPermission();
