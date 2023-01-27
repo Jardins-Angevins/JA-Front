@@ -72,7 +72,7 @@ class MapGeneralView extends SuperComponent {
 						this.state.legendIds.map( (nominalNumber,i) => (
 						<View style={{flexDirection:'row'}} key={i}>
 							<Image style={styles.legend} source={PlantMarker.getNthMarkerImage(i)} />
-							<PlantBox nominalNumber={nominalNumber} /> 
+							<PlantBox nominalNumber={nominalNumber} navigator={this.advancedNavivate('wiki-plant')} /> 
 						</View> ) )
 					}
 				</View>
